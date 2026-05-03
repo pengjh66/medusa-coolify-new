@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm outdated *)",
+      "Bash(npm view *)",
+      "Bash(yarn install *)",
+      "PowerShell(yarn install *)",
+      "PowerShell(npm install *)",
+      "PowerShell(Get-Process *)",
+      "PowerShell(npm list *)"
+    ]
+  }
+}

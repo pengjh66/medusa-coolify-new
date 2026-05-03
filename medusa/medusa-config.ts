@@ -46,7 +46,14 @@ module.exports = defineConfig({
         },
       },
     },
+    {
+      resolve: "@medusajs/medusa/translation",
+    },
   ],
+
+  featureFlags: {
+    translation: true,
+  },
 
 });
 

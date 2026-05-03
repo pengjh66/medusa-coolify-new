@@ -32,7 +32,9 @@
     "@mikro-orm/migrations": "6.6.12",
     "@mikro-orm/postgresql": "6.6.12",
     "awilix": "^8.0.1",
-    "pg": "^8.13.0"
+    "pg": "^8.13.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.2"
   },
   "devDependencies": {
     "@medusajs/test-utils": "2.14.2",
@@ -47,8 +49,6 @@
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "ts-node": "^10.9.2",
-    "typescript": "^5.6.2",
     "vite": "^5.2.11",
     "yalc": "^1.0.0-pre.53"
   },

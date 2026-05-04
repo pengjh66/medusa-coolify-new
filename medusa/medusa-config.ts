@@ -49,6 +49,9 @@ module.exports = defineConfig({
     {
       resolve: "@medusajs/medusa/translation",
     },
+    {
+      resolve: "./src/modules/product-review",
+    },
   ],
 
   featureFlags: {

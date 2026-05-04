@@ -2,7 +2,15 @@ import type { MedusaRequest, MedusaResponse } from "@medusajs/framework/http";
 import { PRODUCT_REVIEW_MODULE } from "../../../modules/product-review";
 
 export async function GET(req: MedusaRequest, res: MedusaResponse) {
-  const { product_id, status = "approved", offset = 0, limit = 10 } = req.query;
+  const { product_id, offset = 0, limit = 10, fields, order } = req.query;
+
+  // Handle status as array (status[0]=approved) or single value
+  let statusFilter = req.query.status;
+  if (Array.isArray(statusFilter)) {
+    statusFilter = statusFilter[0];
+  } else if (!statusFilter) {
+    statusFilter = "approved";
+  }
 
   if (!product_id) {
     return res.status(400).json({
@@ -12,13 +20,21 @@ export async function GET(req: MedusaRequest, res: MedusaResponse) {
 
   const productReviewService = req.scope.resolve(PRODUCT_REVIEW_MODULE);
 
+  // Build order clause
+  const orderClause: any = {};
+  if (order === "created_at") {
+    orderClause.created_at = "ASC";
+  } else {
+    orderClause.created_at = "DESC";
+  }
+
   const [reviews, count] = await productReviewService.listAndCountReviews({
     product_id,
-    status,
+    status: statusFilter,
   }, {
     skip: Number(offset),
     take: Number(limit),
-    order: { created_at: "DESC" },
+    order: orderClause,
   });
 
   // Format response to match @lambdacurry/medusa-plugins-sdk expected structure
